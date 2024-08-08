@@ -6,6 +6,7 @@
 #   RRoot,1/1/2030,Created Script
 #   Rebecca Bergh,8/5/2024,Modified script, added formatted "Goodbye..." message
 #   Rebecca Bergh,8/6/2024,Created classes, functions and did organization
+#   Rebecca Bergh,8/7/2024,Removed unnecessary uses of global variables and did some cleaning
 # ------------------------------------------------------------------------------------------ #
 
 import json
@@ -36,7 +37,7 @@ class FileProcessor:
     """
     A collection of functions to process the file
 
-    ChangeLog:(Who,When,What):
+    ChangeLog: Who,When,What:
     RBergh,8/6/2024,Created class
     """
 
@@ -73,7 +74,7 @@ class FileProcessor:
                 print(f'Student {student["FirstName"]} '
                       f'{student["LastName"]} is enrolled in {student["CourseName"]}')
         except Exception as e:
-            if file.closed == False:
+            if not file.closed:
                 file.close()
             IO.output_error_message('Unhandled exception', e)
 
@@ -82,7 +83,7 @@ class IO:
     """
     A collection of functions that handle user input
 
-    ChangeLog:(Who,When,What)
+    ChangeLog: Who,When,What
     RBergh,8/6/2024,Created class
     """
 
@@ -138,7 +139,6 @@ class IO:
 
     @staticmethod
     def output_student_courses(student_data: list):
-        global students
         print("-" * 50)
         for student in students:
             print(f'Student {student["FirstName"]} '
@@ -155,7 +155,7 @@ class IO:
 FileProcessor.read_data_from_file(FILE_NAME, students)
 
 # Present and Process the data
-while (True):
+while True:
     IO.output_menu(MENU)
     menu_choice = IO.input_menu_choice('Make a menu selection: ')
 
