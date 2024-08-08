@@ -9,6 +9,8 @@
 #   Rebecca Bergh,8/7/2024,Removed unnecessary uses of global variables and did some cleaning
 # ------------------------------------------------------------------------------------------ #
 
+# imports
+
 import json
 
 # Define the Data Constants
@@ -33,6 +35,8 @@ menu_choice: str = ''
 students: list = []
 
 
+# ╔══ CLASS SECTION ═════════════════════════════════╗
+
 class FileProcessor:
     """
     A collection of functions to process the file
@@ -51,7 +55,7 @@ class FileProcessor:
             file.close()
         except FileNotFoundError as e:
             IO.output_error_message('JSON file not found', e)
-            print('═'*20)
+            print('═' * 20)
             print("Creating file since it doesn't exist")
             file = open(file_name, 'w')
             json.dump(students, file)
@@ -150,7 +154,10 @@ class IO:
         print(menu)
 
 
-# MAIN CONTENT
+# ╚══ END CLASS SECTION ══════════════════════════════╝
+
+
+# ╔══ MAIN CONTENT ═══════════════════════════════════╗
 # read data from file
 FileProcessor.read_data_from_file(FILE_NAME, students)
 
